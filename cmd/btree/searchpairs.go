@@ -25,9 +25,19 @@ func main() {
 	list15 := &btree.Node{Data: 11, Left: list12, Right: list13}
 	root := &btree.Node{Data: 7, Left: list14, Right: list15}
 
-	res := btree.BFSearch(root, func(n *btree.Node) bool {
-		return root.Data+n.Data == 20
-	})
+	res := bfSearch(root, 20)
+	log.Println(root.Data, res.Data)
+}
 
-	log.Print(root.Data, res.Data)
+func bfSearch(root *btree.Node, k int) *btree.Node {
+	iterator := root.GetIterator()
+	for iterator.HasNext() {
+		node := iterator.Next()
+
+		if root.Data+node.Data == k {
+			return node
+		}
+	}
+
+	return nil
 }

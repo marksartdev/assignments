@@ -7,3 +7,8 @@ type Node struct {
 	Left  *Node
 	Right *Node
 }
+
+// GetIterator for B-Tree.
+func (n *Node) GetIterator() Iterator {
+	return &treeIterator{queue: []*Node{n}}
+}
